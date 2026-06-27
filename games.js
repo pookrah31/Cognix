@@ -119,7 +119,7 @@ const PatternMatrix = {
         this.state.pattern.forEach(idx => cells[idx].classList.add('flash'));
 
         // Show for a duration based on difficulty
-        const showTime = this.state.difficulty === 'easy' ? 2000 : this.state.difficulty === 'medium' ? 1500 : 1000;
+        const showTime = this.state.difficulty === 'easy' ? 1500 : this.state.difficulty === 'medium' ? 1000 : 600;
         await new Promise(r => setTimeout(r, showTime));
 
         if (currentGame !== 'pm') return; // Safety exit
