@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cognix - Cognitive Suite</title>
+    <meta name="description" content="Cognix Cognitive Suite — free brain training games for memory, focus, speed, and typing skills.">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background glowing orbs -->
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    <div class="glow-orb orb-3"></div>
+
+    <div id="desktop-layout">
+        <!-- Left Panel: Profile & Objectives -->
+        <div class="desktop-panel side-panel-left">
+            <div class="panel-header">
+                <span class="panel-icon">👤</span>
+                <h2>Cognitive Profile</h2>
+            </div>
+            <div class="profile-card">
+                <div class="avatar">🧠</div>
+                <div class="profile-info">
+                    <h3>Neuro-Trainer</h3>
+                    <p>Level 4 Cognition</p>
+                </div>
+            </div>
+            <div class="metrics">
+                <div class="metric">
+                    <div class="metric-label">Memory Span <span class="metric-val">82%</span></div>
+                    <div class="metric-bar"><div class="metric-fill" style="width: 82%;"></div></div>
+                </div>
+                <div class="metric">
+                    <div class="metric-label">Processing Speed <span class="metric-val">75%</span></div>
+                    <div class="metric-bar"><div class="metric-fill" style="width: 75%;"></div></div>
+                </div>
+                <div class="metric">
+                    <div class="metric-label">Focus / Attention <span class="metric-val">90%</span></div>
+                    <div class="metric-bar"><div class="metric-fill" style="width: 90%;"></div></div>
+                </div>
+            </div>
+            <div class="objectives">
+                <h4>Daily Objectives</h4>
+                <ul>
+                    <li class="completed">✓ Start Cognix Suite</li>
+                    <li>○ Memorize 5+ items in Recall</li>
+                    <li>○ Get x10 Streak in Color Clash</li>
+                </ul>
+            </div>
+            <div class="neuro-tip" style="margin-top: 1.5rem; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--glass-border); padding: 1.2rem; border-radius: 16px;">
+                <h4 style="font-size: 0.95rem; color: var(--primary-color); margin-bottom: 0.4rem; font-weight: 600;">🧠 Neuro-Tip of the Day</h4>
+                <p id="neuro-tip-text" style="font-size: 0.85rem; line-height: 1.4; color: var(--text-muted); margin: 0;">Regular cognitive training builds new pathways in the brain!</p>
+            </div>
+        </div>
+
+        <div id="app-container">
+        
+        <!-- Global Overlays -->
+        <div id="stats-overlay" class="overlay">
+            <div class="modal-content" style="max-height: 90%; overflow-y: auto; text-align: center;">
+                <h2 class="title" style="font-size: 2rem; margin-bottom: 1.5rem;">🏆 Personal Bests</h2>
+                
+                <div class="stats-list" style="display: flex; flex-direction: column; gap: 0.8rem; text-align: left; margin-bottom: 1.5rem;">
+                    <div class="stat-row" style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 0.5rem;">
+                        <span class="stat-name">Reverse Recall High</span>
+                        <span class="stat-value" id="desktop-rr-hs" style="font-weight: 700; color: var(--primary-color);">0</span>
+                    </div>
+                    <div class="stat-row" style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 0.5rem;">
+                        <span class="stat-name">Color Clash High</span>
+                        <span class="stat-value" id="desktop-cc-hs" style="font-weight: 700; color: var(--primary-color);">0</span>
+                    </div>
+                    <div class="stat-row" style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 0.5rem;">
+                        <span class="stat-name">Pattern Matrix High</span>
+                        <span class="stat-value" id="desktop-pm-hs" style="font-weight: 700; color: var(--primary-color);">0</span>
+                    </div>
+                    <div class="stat-row" style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 0.5rem;">
+                        <span class="stat-name">Math Blitz High</span>
+                        <span class="stat-value" id="desktop-mb-hs" style="font-weight: 700; color: var(--primary-color);">0</span>
+                    </div>
+                    <div class="stat-row" style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 0.5rem;">
+                        <span class="stat-name">Type Rush High</span>
+                        <span class="stat-value" id="desktop-tr-hs" style="font-weight: 700; color: var(--primary-color);">0</span>
+                    </div>
+                </div>
+
+                <button id="close-stats-btn" class="primary-btn">Close Stats</button>
+            </div>
+        </div>
+
+        <div id="settings-overlay" class="overlay">
+            <div class="modal-content" style="max-height: 90%; overflow-y: auto; text-align: center;">
+                <h2 class="title" style="font-size: 2rem; margin-bottom: 1.5rem;">Settings</h2>
+                
+                <!-- Controls Section -->
+                <div class="settings-group" style="margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; width: 100%;">
+                    <button id="toggle-sound-btn" class="settings-control-btn sound-on">🔊 Sound: ON</button>
+                    <button id="reset-scores-btn" class="settings-control-btn reset-btn">⚠️ Reset High Scores</button>
+                </div>
+
+                <div style="border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 1rem;">
+                    <h3 style="color: var(--secondary-color); margin-bottom: 1rem; font-size: 1.2rem;">How to Play</h3>
+                    
+                    <!-- Tab Headers -->
+                    <div class="help-tabs" style="display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 1rem;">
+                        <button class="help-tab active" data-tab="help-rr" style="padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; cursor: pointer; transition: all 0.2s;">🧠</button>
+                        <button class="help-tab" data-tab="help-cc" style="padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; cursor: pointer; transition: all 0.2;">🎨</button>
+                        <button class="help-tab" data-tab="help-pm" style="padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; cursor: pointer; transition: all 0.2;">🔲</button>
+                        <button class="help-tab" data-tab="help-mb" style="padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; cursor: pointer; transition: all 0.2;">➕</button>
+                        <button class="help-tab" data-tab="help-tr" style="padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; cursor: pointer; transition: all 0.2;">⌨️</button>
+                    </div>
+                    
+                    <!-- Tab Contents -->
+                    <div class="help-contents" style="margin-top: 1rem; min-height: 130px; border: 1px solid rgba(255,255,255,0.05); padding: 1rem; border-radius: 12px; background: rgba(255,255,255,0.02);">
+                        <div id="help-rr" class="help-pane active">
+                            <h4 style="color: var(--primary-color); margin-bottom: 0.5rem; text-align: left;">🧠 Reverse Recall</h4>
+                            <ul style="text-align: left; margin: 0; color: var(--text-muted); line-height: 1.4; font-size: 0.9rem; padding-left: 1.25rem;">
+                                <li>Memorize the sequence of numbers.</li>
+                                <li>Enter them in <strong>reverse order</strong>.</li>
+                                <li>Ignore floating shapes on Medium/Hard modes!</li>
+                            </ul>
+                        </div>
+
+                        <div id="help-cc" class="help-pane" style="display: none;">
+                            <h4 style="color: var(--primary-color); margin-bottom: 0.5rem; text-align: left;">🎨 Color Clash</h4>
+                            <ul style="text-align: left; margin: 0; color: var(--text-muted); line-height: 1.4; font-size: 0.9rem; padding-left: 1.25rem;">
+                                <li>A word will appear (e.g., "RED").</li>
+                                <li>Click the button matching the <strong>INK COLOR</strong> of the word.</li>
+                                <li>Do NOT click the word it spells!</li>
+                            </ul>
+                        </div>
+
+                        <div id="help-pm" class="help-pane" style="display: none;">
+                            <h4 style="color: var(--primary-color); margin-bottom: 0.5rem; text-align: left;">🔲 Pattern Matrix</h4>
+                            <ul style="text-align: left; margin: 0; color: var(--text-muted); line-height: 1.4; font-size: 0.9rem; padding-left: 1.25rem;">
+                                <li>A pattern of cells will flash on the grid.</li>
+                                <li>Memorize the highlighted cells.</li>
+                                <li>Click to <strong>reproduce the exact pattern</strong> from memory.</li>
+                            </ul>
+                        </div>
+
+                        <div id="help-mb" class="help-pane" style="display: none;">
+                            <h4 style="color: var(--primary-color); margin-bottom: 0.5rem; text-align: left;">➕ Math Blitz</h4>
+                            <ul style="text-align: left; margin: 0; color: var(--text-muted); line-height: 1.4; font-size: 0.9rem; padding-left: 1.25rem;">
+                                <li>Solve arithmetic problems as fast as you can.</li>
+                                <li>Pick the <strong>correct answer</strong> from 4 choices.</li>
+                                <li>Speed bonuses for fast answers!</li>
+                            </ul>
+                        </div>
+
+                        <div id="help-tr" class="help-pane" style="display: none;">
+                            <h4 style="color: var(--primary-color); margin-bottom: 0.5rem; text-align: left;">⌨️ Type Rush</h4>
+                            <ul style="text-align: left; margin: 0; color: var(--text-muted); line-height: 1.4; font-size: 0.9rem; padding-left: 1.25rem;">
+                                <li>Type the displayed words as fast and accurately as you can.</li>
+                                <li>Press <strong>Space</strong> or <strong>Enter</strong> to submit each word.</li>
+                                <li>Scored on WPM (words per minute) and accuracy.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="close-settings-btn" class="primary-btn" style="margin-top: 0.5rem;">Save & Close</button>
+            </div>
+        </div>
+
+        <div id="pause-overlay" class="overlay">
+            <h2 class="title" style="font-size: 2rem;">Paused</h2>
+            <button id="resume-btn" class="primary-btn" style="width: 200px; margin-top: 1rem;">Resume</button>
+            <button id="pause-home-btn" class="secondary-btn" style="width: 200px; margin-top: 0.5rem;">Main Menu</button>
+        </div>
+
+        <!-- Main Menu Screen -->
+        <div id="main-menu-screen" class="screen active">
+            <div style="position: absolute; top: 1.5rem; right: 1.5rem; display: flex; gap: 0.5rem;">
+                <button id="stats-btn" class="icon-btn">🏆 Stats</button>
+                <button id="settings-btn" class="icon-btn">⚙️ Settings</button>
+            </div>
+            <h1 class="title" style="margin-top: 2rem;">Cognix<br><span class="subtitle">Cognitive Suite</span></h1>
+            <p class="description">Select a module to train your brain.</p>
+
+            <div class="game-cards">
+                <div class="game-card" data-game="rr">
+                    <div class="card-icon">🧠</div>
+                    <div class="card-title">Reverse Recall</div>
+                    <div class="card-desc">Working Memory</div>
+                </div>
+                <div class="game-card" data-game="cc">
+                    <div class="card-icon">🎨</div>
+                    <div class="card-title">Color Clash</div>
+                    <div class="card-desc">Cognitive Flexibility</div>
+                </div>
+                <div class="game-card" data-game="pm">
+                    <div class="card-icon">🔲</div>
+                    <div class="card-title">Pattern Matrix</div>
+                    <div class="card-desc">Spatial Memory</div>
+                </div>
+                <div class="game-card" data-game="mb">
+                    <div class="card-icon">➕</div>
+                    <div class="card-title">Math Blitz</div>
+                    <div class="card-desc">Processing Speed</div>
+                </div>
+                <div class="game-card" data-game="tr">
+                    <div class="card-icon">⌨️</div>
+                    <div class="card-title">Type Rush</div>
+                    <div class="card-desc">Motor Speed</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- REVERSE RECALL SCREENS -->
+        <!-- ============================================== -->
+
+        <div id="rr-start-screen" class="screen">
+            <h1 class="title">Reverse Recall</h1>
+            <div class="high-score-container">High Score: <span id="rr-high-score">0</span></div>
+            <div class="difficulty-selector" id="rr-difficulty">
+                <button class="diff-btn" data-diff="easy">Easy</button>
+                <button class="diff-btn active" data-diff="medium">Medium</button>
+                <button class="diff-btn" data-diff="hard">Hard</button>
+            </div>
+            <button id="rr-start-btn" class="primary-btn">Start Game</button>
+            <button class="secondary-btn go-home-btn">Main Menu</button>
+        </div>
+
+        <div id="rr-game-screen" class="screen">
+            <div class="game-header">
+                <div class="stat">Lvl <span id="rr-level">1</span></div>
+                <div class="stat">Score <span id="rr-score">0</span></div>
+                <div class="stat multiplier">Streak x<span id="rr-streak">1</span></div>
+            </div>
+            <div class="game-controls">
+                <button class="control-btn pause-btn">Pause</button>
+                <button class="control-btn quit quit-btn">Quit</button>
+            </div>
+            <div class="timer-container"><div id="rr-timer-bar"></div></div>
+            
+            <div id="display-area">
+                <div id="rr-sequence-display">Get Ready...</div>
+            </div>
+            <div id="distraction-layer"></div>
+            
+            <div class="input-area">
+                <div class="player-input-display" id="rr-player-input">_ _ _</div>
+                <div class="keypad" id="rr-keypad"></div>
+            </div>
+        </div>
+
+        <div id="rr-game-over-screen" class="screen">
+            <h1 class="title">Game Over</h1>
+            <p id="rr-game-over-msg">Wrong sequence!</p>
+            <div class="score-card">
+                <div class="final-stat">Score: <span id="rr-final-score">0</span></div>
+                <div class="final-stat">Level: <span id="rr-final-level">1</span></div>
+            </div>
+            <div id="rr-new-high-score" class="hidden">🎉 New High Score! 🎉</div>
+            <button id="rr-restart-btn" class="primary-btn">Play Again</button>
+            <button class="secondary-btn go-home-btn">Main Menu</button>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- COLOR CLASH SCREENS -->
+        <!-- ============================================== -->
+
+        <div id="cc-start-screen" class="screen">
+            <h1 class="title">Color Clash</h1>
+            <p class="description">Click the INK color, not the word!</p>
+            <div class="high-score-container">High Score: <span id="cc-high-score">0</span></div>
+            <div class="difficulty-selector" id="cc-difficulty">
+                <button class="diff-btn" data-diff="easy">Easy</button>
+                <button class="diff-btn active" data-diff="medium">Medium</button>
+                <button class="diff-btn" data-diff="hard">Hard</button>
+            </div>
+            <button id="cc-start-btn" class="primary-btn">Start Game</button>
+            <button class="secondary-btn go-home-btn">Main Menu</button>
+        </div>
+
+        <div id="cc-game-screen" class="screen">
+            <div class="game-header">
+                <div class="stat">Words <span id="cc-level">0</span></div>
+                <div class="stat">Score <span id="cc-score">0</span></div>
+                <div class="stat multiplier">Streak x<span id="cc-streak">1</span></div>
+            </div>
+            <div class="game-controls">
+                <button class="control-btn pause-btn">Pause</button>
+                <button class="control-btn quit quit-btn">Quit</button>
+            </div>
+            <div class="timer-container"><div id="cc-timer-bar"></div></div>
+            
+            <div id="cc-display-area" style="flex-grow:1; display:flex; justify-content:center; align-items:center;">
+                <div id="cc-word-display" style="font-size: 4rem; font-weight: 800; text-transform: uppercase; text-shadow: 0 0 20px rgba(255,255,255,0.1);">RED</div>
+            </div>
+
+            <div class="cc-keypad" id="cc-keypad">
+                <!-- Color buttons generated via JS -->
+            </div>
+        </div>
+
+        <div id="cc-game-over-screen" class="screen">
+            <h1 class="title">Game Over</h1>
+            <p id="cc-game-over-msg">Stay sharp!</p>
+            <div class="score-card">
+                <div class="final-stat">Score: <span id="cc-final-score">0</span></div>
+                <div class="final-stat">Words: <span id="cc-final-level">0</span></div>
+            </div>
+            <div id="cc-new-high-score" class="hidden">🎉 New High Score! 🎉</div>
+            <button id="cc-restart-btn" class="primary-btn">Play Again</button>
+            <button class="secondary-btn go-home-btn">Main Menu</button>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- PATTERN MATRIX SCREENS -->
+        <!-- ============================================== -->
+
+        <div id="pm-start-screen" class="screen">
+            <h1 class="title">Pattern Matrix</h1>
+            <p class="description">Memorize the grid pattern!</p>
+            <div class="high-score-container">High Score: <span id="pm-high-score">0</span></div>
+            <div class="difficulty-selector" id="pm-difficulty">
+                <button class="diff-btn" data-diff="easy">Easy</button>
+                <button class="diff-btn active" data-diff="medium">Medium</button>
+                <button class="diff-btn" data-diff="hard">Hard</button>
+            </div>
+            <button id="pm-start-btn" class="primary-btn">Start Game</button>
+            <button class="secondary-btn go-home-btn">Main Menu</button>
+        </div>
+
+        <div id="pm-game-screen" class="screen">
+            <div class="game-header">
+                <div class="stat">Lvl <span id="pm-level">1</span></div>
+                <div class="stat">Score <span id="pm-score">0</span></div>
+                <div class="stat multiplier">Streak x<span id="pm-streak">0</span></div>
+            </div>
+            <div class="game-controls">
+                <button class="control-btn pause-btn">Pause</button>
+                <button class="control-btn quit quit-btn">Quit</button>
+            </div>
+            <div id="pm-status" class="pm-status">Watch the pattern...</div>
+            <div id="pm-grid" class="pm-grid">
+                <!-- Grid cells generated via JS -->
+            </div>
+        </div>
+
+        <div id="pm-game-over-screen" class="screen">
+            <h1 class="title">Game Over</h1>
+            <p id="pm-game-over-msg">Wrong pattern!</p>
+            <div class="score-card">
+                <div class="final-stat">Score: <span id="pm-final-score">0</span></div>
+                <div class="final-stat">Level: <span id="pm-final-level">1</span></div>
+            </div>
+            <div id="pm-new-high-score" class="hidden">🎉 New High Score! 🎉</div>
+            <button id="pm-restart-btn" class="primary-btn">Play Again</button>
+            <button class="secondary-btn go-home-btn">Main Menu</button>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- MATH BLITZ SCREENS -->
+        <!-- ============================================== -->
+
+        <div id="mb-start-screen" class="screen">
+            <h1 class="title">Math Blitz</h1>
+            <p class="description">Solve as fast as you can!</p>
+            <div class="high-score-container">High Score: <span id="mb-high-score">0</span></div>
+            <div class="difficulty-selector" id="mb-difficulty">
+                <button class="diff-btn" data-diff="easy">Easy</button>
+                <button class="diff-btn active" data-diff="medium">Medium</button>
+                <button class="diff-btn" data-diff="hard">Hard</button>
+            </div>
+            <button id="mb-start-btn" class="primary-btn">Start Game</button>
+            <button class="secondary-btn go-home-btn">Main Menu</button>
+        </div>
+
+        <div id="mb-game-screen" class="screen">
+            <div class="game-header">
+                <div class="stat">Q <span id="mb-level">1</span></div>
+                <div class="stat">Score <span id="mb-score">0</span></div>
+                <div class="stat multiplier">Streak x<span id="mb-streak">0</span></div>
+            </div>
+            <div class="game-controls">
+                <button class="control-btn pause-btn">Pause</button>
+                <button class="control-btn quit quit-btn">Quit</button>
+            </div>
+            <div class="timer-container"><div id="mb-timer-bar"></div></div>
+            <div class="mb-problem" id="mb-problem">12 + 7 = ?</div>
+            <div class="mb-answers" id="mb-answers">
+                <!-- Answer buttons generated via JS -->
+            </div>
+        </div>
+
+        <div id="mb-game-over-screen" class="screen">
+            <h1 class="title">Game Over</h1>
+            <p id="mb-game-over-msg">Time's up!</p>
+            <div class="score-card">
+                <div class="final-stat">Score: <span id="mb-final-score">0</span></div>
+                <div class="final-stat">Questions: <span id="mb-final-level">0</span></div>
+            </div>
+            <div id="mb-new-high-score" class="hidden">🎉 New High Score! 🎉</div>
+            <button id="mb-restart-btn" class="primary-btn">Play Again</button>
+            <button class="secondary-btn go-home-btn">Main Menu</button>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- TYPE RUSH SCREENS -->
+        <!-- ============================================== -->
+
+        <div id="tr-start-screen" class="screen">
+            <h1 class="title">Type Rush</h1>
+            <p class="description">Type fast, type accurate!</p>
+            <div class="high-score-container">High Score: <span id="tr-high-score">0</span></div>
+            <div class="difficulty-selector" id="tr-difficulty">
+                <button class="diff-btn" data-diff="easy">Easy</button>
+                <button class="diff-btn active" data-diff="medium">Medium</button>
+                <button class="diff-btn" data-diff="hard">Hard</button>
+            </div>
+            <button id="tr-start-btn" class="primary-btn">Start Game</button>
+            <button class="secondary-btn go-home-btn">Main Menu</button>
+        </div>
+
+        <div id="tr-game-screen" class="screen">
+            <div class="game-header">
+                <div class="stat">Words <span id="tr-level">0</span></div>
+                <div class="stat">Score <span id="tr-score">0</span></div>
+                <div class="stat multiplier">WPM <span id="tr-wpm">0</span></div>
+            </div>
+            <div class="game-controls">
+                <button class="control-btn pause-btn">Pause</button>
+                <button class="control-btn quit quit-btn">Quit</button>
+            </div>
+            <div class="timer-container"><div id="tr-timer-bar"></div></div>
+            <div class="tr-prompt" id="tr-prompt">hello</div>
+            <input type="text" class="tr-input" id="tr-input" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Type here...">
+            <div class="tr-stats">
+                <span>Accuracy: <span id="tr-accuracy">100</span>%</span>
+                <span>Streak: x<span id="tr-streak">0</span></span>
+            </div>
+        </div>
+
+        <div id="tr-game-over-screen" class="screen">
+            <h1 class="title">Time's Up!</h1>
+            <p id="tr-game-over-msg">Great typing!</p>
+            <div class="score-card">
+                <div class="final-stat">Score: <span id="tr-final-score">0</span></div>
+                <div class="final-stat">WPM: <span id="tr-final-wpm">0</span></div>
+                <div class="final-stat">Accuracy: <span id="tr-final-accuracy">100</span>%</div>
+                <div class="final-stat">Words: <span id="tr-final-level">0</span></div>
+            </div>
+            <div id="tr-new-high-score" class="hidden">🎉 New High Score! 🎉</div>
+            <button id="tr-restart-btn" class="primary-btn">Play Again</button>
+            <button class="secondary-btn go-home-btn">Main Menu</button>
+        </div>
+
+    </div>
+
+    </div>
+    <script src="script.js"></script>
+    <script src="games.js"></script>
+</body>
+</html>
