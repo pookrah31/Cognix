@@ -921,9 +921,10 @@ button {
 
 .pm-grid {
     display: grid;
-    gap: 6px;
+    gap: 8px;
     margin: 0 auto;
-    max-width: 320px;
+    width: 100%;
+    max-width: 440px;
     aspect-ratio: 1;
 }
 
